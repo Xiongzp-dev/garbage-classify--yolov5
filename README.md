@@ -102,7 +102,7 @@ cd garbage-yolov5
 # 安装依赖
 pip install -r requirements.txt
 ```
---
+---
 
 ## 5. 数据集说明
 
@@ -124,7 +124,7 @@ names: [recyclable, harmful, kitchen, other]
 ```
 -出于体积与隐私考虑，仓库中并没有附带完整数据集，可根据论文说明自行采集或联系作者获取。
 
---
+---
 
 ## 6. 训练改进后的 YOLOv5s 模型
 
@@ -145,9 +145,9 @@ python train.py \
   --project runs/train \
   --name garbage_yolov5s_improved
 ```
---
+---
 
-## 8. 实验结果概览
+## 7. 实验结果概览
 
 在自建垃圾数据集验证集上，改进 YOLOv5s 模型取得了约：
 
@@ -164,7 +164,7 @@ python train.py \
 
 ---
 
-## 9. 许可证（示例）
+## 8. 许可证（示例）
 
 可根据实际情况选择开源协议，这里示例为 MIT：
 
