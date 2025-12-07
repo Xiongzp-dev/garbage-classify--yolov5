@@ -164,7 +164,16 @@ python train.py \
 
 ---
 
-## 8. 许可证（示例）
+## 8. 参考与致谢
+
+原始 YOLOv5 项目（Ultralytics）：
+https://github.com/ultralytics/yolov5
+
+RKNN 工具链与 OrangePi 相关文档
+
+若干云服务器训练、标注工具 LabelImg 与 RKNN 部署的社区教程（在论文中有详细引用）
+
+## 9. 许可证（示例）
 
 可根据实际情况选择开源协议，这里示例为 MIT：
 
