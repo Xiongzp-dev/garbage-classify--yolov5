@@ -77,7 +77,7 @@
 ├── export.py                     # 导出 ONNX / TorchScript
 ├── README.md                     # 本文件
 └── ...
-
+```
 ---
 
 ## 4. 环境配置
@@ -101,7 +101,7 @@ cd garbage-yolov5
 
 # 安装依赖
 pip install -r requirements.txt
-
+```
 --
 
 ## 5. 数据集说明
@@ -121,7 +121,7 @@ test:  path/to/test/images
 
 nc: 4
 names: [recyclable, harmful, kitchen, other]
-
+```
 -出于体积与隐私考虑，仓库中并没有附带完整数据集，可根据论文说明自行采集或联系作者获取。
 
 --
@@ -144,7 +144,7 @@ python train.py \
   --label-smoothing 0.02 \
   --project runs/train \
   --name garbage_yolov5s_improved
-
+```
 --
 
 ## 8. 实验结果概览
