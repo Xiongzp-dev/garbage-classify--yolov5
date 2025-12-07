@@ -1,0 +1,47 @@
+# YOLOv5 超参数配置（垃圾分类项目专用）
+
+# 优化器与训练调度
+lr0: 0.01          # 初始学习率 (SGD=1E-2, Adam=1E-3)
+lrf: 0.01          # 最终学习率 (lr0 * lrf)
+momentum: 0.937    # SGD 动量 / Adam beta1
+weight_decay: 0.0005   # 权重衰减
+warmup_epochs: 3.0     # warmup 轮数
+warmup_momentum: 0.8   # warmup 初始动量
+warmup_bias_lr: 0.1    # warmup 初始 bias 学习率
+
+# 损失函数权重
+box: 0.07          # 边界框回归损失权重（默认 0.05，适当提高）
+cls: 0.5           # 分类损失权重
+cls_pw: 1.0        # 分类 BCE 正样本权重
+obj: 0.8           # 目标置信度损失权重（默认 1.0，适当减小）
+obj_pw: 1.0        # 目标 BCE 正样本权重
+iou_t: 0.20        # IoU 正负样本阈值
+anchor_t: 4.0      # anchor 匹配阈值
+fl_gamma: 0.0      # Focal Loss gamma（0 表示不用 focal）
+label_smoothing: 0.0  # 标签平滑系数（如果训练命令里加 --label-smoothing 会覆盖这里）
+nbs: 64            # 标准 batch size，用于 loss 缩放
+
+# 颜色与几何增强
+hsv_h: 0.015       # 色调扰动
+hsv_s: 0.7         # 饱和度扰动
+hsv_v: 0.4         # 亮度扰动
+degrees: 5.0       # 随机旋转角度
+translate: 0.1     # 平移比例
+scale: 0.5         # 尺度缩放比例
+shear: 0.0         # 剪切变换
+perspective: 0.0   # 透视变换
+
+# 翻转与拼接
+flipud: 0.0        # 上下翻转概率（托盘场景不建议翻）
+fliplr: 0.5        # 左右翻转概率
+mosaic: 0.80       # Mosaic 概率（前期强增强，后期用 train.py 关掉）
+mixup: 0.10        # Mixup 概率（同上）
+copy_paste: 0.0    # 只有分割任务才用的 copy-paste，这里保持 0
+
+
+
+
+
+
+
+
