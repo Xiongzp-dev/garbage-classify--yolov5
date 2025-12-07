@@ -77,3 +77,97 @@
 ├── export.py                     # 导出 ONNX / TorchScript
 ├── README.md                     # 本文件
 └── ...
+
+---
+
+## 4. 环境配置
+
+### 4.1 训练环境（示例）
+
+- 平台：云端 GPU（如 AutoDL 等）  
+- GPU：NVIDIA RTX 系列显卡  
+- 系统：Ubuntu 20.04 / 22.04  
+- CUDA：与显卡/驱动匹配的版本  
+- Python：3.8 ~ 3.12  
+- PyTorch：2.x  
+- YOLOv5：基于 Ultralytics 官方仓库修改  
+
+### 4.2 本地配置步骤
+
+```bash
+# 克隆仓库
+git clone https://github.com/Xiongzp-dev/garbage-classify--yolov5.git
+cd garbage-yolov5
+
+# 安装依赖
+pip install -r requirements.txt
+
+--
+
+## 5. 数据集说明
+
+- 数据总量：约 **2100 张** 单目标垃圾图片  
+- 成像环境：统一绿色托盘背景 + LED 补光，单次只落入一件垃圾  
+- 类别：`recyclable`、`harmful`、`kitchen`、`other` 共 4 类  
+- 划分比例：训练集 : 验证集 : 测试集 ≈ **8 : 1 : 1**  
+- 标注格式：标准 YOLO 格式（`class cx cy w h`，均为归一化坐标）  
+
+`coco128.yaml` 示例：
+
+```yaml
+train: path/to/train/images
+val:   path/to/val/images
+test:  path/to/test/images
+
+nc: 4
+names: [recyclable, harmful, kitchen, other]
+
+-出于体积与隐私考虑，仓库中并没有附带完整数据集，可根据论文说明自行采集或联系作者获取。
+
+--
+
+## 6. 训练改进后的 YOLOv5s 模型
+
+在项目根目录下执行以下命令即可训练：
+
+```bash
+python train.py \
+  --weights yolov5s.pt \
+  --cfg models/yolov5s.yaml \
+  --data data/garbage.yaml \
+  --hyp data/hyps/hyp.garbage.yaml \
+  --img 640 \
+  --epochs 141 \
+  --batch-size 8 \
+  --image-weights \
+  --cos-lr \
+  --label-smoothing 0.02 \
+  --project runs/train \
+  --name garbage_yolov5s_improved
+
+--
+
+## 8. 实验结果概览
+
+在自建垃圾数据集验证集上，改进 YOLOv5s 模型取得了约：
+
+| 指标         | 数值   |
+| ------------ | ------ |
+| Precision    | 0.957  |
+| Recall       | 0.937  |
+| mAP@0.5      | 0.963  |
+| mAP@0.5–0.95 | 0.898  |
+
+- 训练与验证的 `box_loss`、`cls_loss`、`dfl_loss` 曲线整体平滑下降，无明显过拟合。  
+- mAP 曲线在 40–60 epoch 区间达到高值并趋于稳定。  
+- 在实际测试中，可回收物与其他垃圾检测置信度普遍在 0.97 以上，有害垃圾中白色药片与瓷片、橙色电池与胡萝卜极少数情况下存在混淆。  
+
+---
+
+## 9. 许可证（示例）
+
+可根据实际情况选择开源协议，这里示例为 MIT：
+
+```text
+This project is licensed under the MIT License.
+See the LICENSE file for details.
